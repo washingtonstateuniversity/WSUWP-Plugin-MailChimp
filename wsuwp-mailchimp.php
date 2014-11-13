@@ -9,7 +9,6 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
-// shortcode
 // widget
 
 // capture
@@ -18,12 +17,16 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 //  - subscribe_label
 //  - subscribe_button
 
+// Include code for the widget.
+include_once( __DIR__ . '/includes/widget-wsu-mailchimp.php' );
+
 class WSU_MailChimp {
 	/**
 	 * Configure hooks.
 	 */
 	public function __construct() {
 		add_shortcode( 'wsu_mailchimp_subscribe', array( $this, 'display_mailchimp_subscribe_shortcode' ) );
+		add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 	}
 
 	public function display_mailchimp_subscribe_shortcode( $atts ) {
@@ -57,6 +60,10 @@ class WSU_MailChimp {
 		ob_end_clean();
 
 		return $content;
+	}
+
+	public function widgets_init() {
+		register_widget( 'Widget_WSU_MailChimp' );
 	}
 }
 new WSU_MailChimp();
