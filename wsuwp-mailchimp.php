@@ -39,10 +39,6 @@ class WSU_MailChimp {
 
 		?><!-- Begin MailChimp Signup Form -->
 		<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
-		<style type="text/css">
-			#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-		</style>
-
 		<div id="mc_embed_signup">
 			<form action="//wsu.us3.list-manage.com/subscribe/post?u=<?php esc_attr_e( $atts['user_id'] ); ?>&amp;id=<?php esc_attr_e( $atts['list_id'] ); ?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 				<div id="mc_embed_signup_scroll">
