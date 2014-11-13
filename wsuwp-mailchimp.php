@@ -29,7 +29,7 @@ class WSU_MailChimp {
 	public function display_mailchimp_subscribe_shortcode( $atts ) {
 		$defaults = array(
 			'user_id' => apply_filters( 'wsu_mailchimp_user_id', '' ),
-			'list_id' => '',
+			'list_id' => apply_filters( 'wsu_mailchimp_list_id', '' ),
 			'subscribe_label' => 'Subscribe to our mailing list',
 			'subscribe_button' => 'Subscribe',
 		);
