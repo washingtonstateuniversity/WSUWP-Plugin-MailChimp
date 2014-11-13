@@ -93,8 +93,16 @@ class Widget_WSU_MailChimp extends WP_Widget {
 	 *
 	 * @param array $new_instance
 	 * @param array $old_instance
+	 *
+	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['user_id'] = sanitize_key( $new_instance['user_id'] );
+		$instance['list_id'] = sanitize_key( $new_instance['list_id'] );
+		$instance['subscribe_label'] = sanitize_text_field( $new_instance['subscribe_label'] );
+		$instance['subscribe_button'] = sanitize_text_field( $new_instance['subscribe_button'] );
 
+		return $instance;
 	}
 }
