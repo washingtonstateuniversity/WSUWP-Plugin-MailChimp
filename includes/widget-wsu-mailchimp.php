@@ -46,8 +46,46 @@ class Widget_WSU_MailChimp extends WP_Widget {
 	 *
 	 * @param array $instance
 	 */
-	public function form( $instance ) {
+	public function form( $instance = array() ) {
+		//Defaults
+		$defaults = array(
+			'user_id' => '',
+			'list_id' => '',
+			'subscribe_label' => 'Subscribe to our mailing list',
+			'subscribe_button' => 'Subscribe',
+		);
+		$instance = wp_parse_args( $instance, $defaults );
 
+		$user_id = esc_attr( $instance['user_id'] );
+		$list_id = esc_attr( $instance['list_id'] );
+		$label = esc_html( $instance['subscribe_label'] );
+		$button = esc_attr( $instance['subscribe_button'] );
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'user_id' ); ?>">User ID:</label>
+			<input id="<?php echo $this->get_field_id( 'user_id' ); ?>"
+				   name="<?php echo $this->get_field_name( 'user_id' ); ?>"
+				   class="widefat" type="text" value="<?php echo $user_id; ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'list_id' ); ?>">List ID:</label>
+			<input id="<?php echo $this->get_field_id( 'list_id' ); ?>"
+				   name="<?php echo $this->get_field_name( 'list_id' ); ?>"
+				   class="widefat" type="text" value="<?php echo $list_id; ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'subscribe_label' ); ?>">Form Label:</label>
+			<input id="<?php echo $this->get_field_id( 'subscribe_label' ); ?>"
+				   name="<?php echo $this->get_field_name( 'subscribe_label' ); ?>"
+				   class="widefat" type="text" value="<?php echo $label; ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'subscribe_button' ); ?>" >Button Text:</label>
+			<input id="<?php echo $this->get_field_id( 'subscribe_button' ); ?>"
+				   name="<?php echo $this->get_field_name( 'subscribe_button' ); ?>"
+				   class="widefat" type="text" value="<?php echo $button; ?>" />
+		</p>
+	<?php
 	}
 
 	/**
