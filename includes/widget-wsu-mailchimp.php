@@ -49,6 +49,7 @@ class Widget_WSU_MailChimp extends WP_Widget {
 	public function form( $instance = array() ) {
 		//Defaults
 		$defaults = array(
+			'server' => 'wsu.us3.list-manage.com',
 			'user_id' => '',
 			'list_id' => '',
 			'subscribe_label' => 'Subscribe to our mailing list',
@@ -56,11 +57,18 @@ class Widget_WSU_MailChimp extends WP_Widget {
 		);
 		$instance = wp_parse_args( $instance, $defaults );
 
+		$server = esc_attr( $instance['server'] );
 		$user_id = esc_attr( $instance['user_id'] );
 		$list_id = esc_attr( $instance['list_id'] );
 		$label = esc_html( $instance['subscribe_label'] );
 		$button = esc_attr( $instance['subscribe_button'] );
 		?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'server' ); ?>">Server:</label>
+			<input id="<?php echo $this->get_field_id( 'server' ); ?>"
+				   name="<?php echo $this->get_field_name( 'server' ); ?>"
+				   class="widefat" type="text" value="<?php echo $server; ?>" />
+		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'user_id' ); ?>">User ID:</label>
 			<input id="<?php echo $this->get_field_id( 'user_id' ); ?>"
@@ -98,6 +106,7 @@ class Widget_WSU_MailChimp extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
+		$instance['server'] = sanitize_text_field( $new_instance['server'] );
 		$instance['user_id'] = sanitize_key( $new_instance['user_id'] );
 		$instance['list_id'] = sanitize_key( $new_instance['list_id'] );
 		$instance['subscribe_label'] = sanitize_text_field( $new_instance['subscribe_label'] );
