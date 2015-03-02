@@ -31,19 +31,41 @@ class WSU_MailChimp {
 
 	public function display_mailchimp_subscribe_shortcode( $atts ) {
 		$defaults = array(
+			'form_action' => '',
 			'user_id' => apply_filters( 'wsu_mailchimp_user_id', '' ),
 			'list_id' => apply_filters( 'wsu_mailchimp_list_id', '' ),
+			'server' => 'wsu.us3.list-manage.com',
 			'subscribe_label' => 'Subscribe to our mailing list',
 			'subscribe_button' => 'Subscribe',
 		);
 		$atts = shortcode_atts( $defaults, $atts );
+
+		if ( '' !== $atts['form_action'] ) {
+			$form_action = array_values( array_filter( explode( '/', $atts['form_action'] ) ) );
+			if ( 3 > count( $form_action ) ) {
+				return '';
+			}
+
+			$atts['server'] = $form_action[0];
+
+			$id_params = explode( '=', $form_action[2] );
+
+			if ( 3 > count( $id_params ) ) {
+				return '';
+			}
+			$atts['list_id'] = $id_params[2];
+			$user_params = explode( '&amp', $id_params[1] );
+			$atts['user_id'] = $user_params[0];
+		}
+
+		$url = '//' . esc_attr( $atts['server'] ) . '/subscribe/post?u=' . esc_attr( $atts['user_id'] ) . '&amp;id=' . esc_attr( $atts['list_id'] );
 
 		ob_start();
 
 		?><!-- Begin MailChimp Signup Form -->
 		<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
 		<div id="mc_embed_signup">
-			<form action="//wsu.us3.list-manage.com/subscribe/post?u=<?php esc_attr_e( $atts['user_id'] ); ?>&amp;id=<?php esc_attr_e( $atts['list_id'] ); ?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+			<form action="<?php echo $url; ?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 				<div id="mc_embed_signup_scroll">
 					<label for="mce-EMAIL"><?php echo esc_html( $atts['subscribe_label'] ); ?></label>
 					<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
