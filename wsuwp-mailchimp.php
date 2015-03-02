@@ -1,21 +1,13 @@
 <?php
 /*
 Plugin Name: WSU MailChimp
-Plugin URI: http://web.wsu.edu/wordpress/plugins/wsu-mailchimp/
+Plugin URI: https://web.wsu.edu/wordpress/plugins/wsu-mailchimp/
 Description: Allow site visitors to subscribe to a mailing list.
 Author: washingtonstateuniversity, jeremyfelt
-Version: 0.0.1
+Version: 0.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
-
-// widget
-
-// capture
-//  - user_id
-//  - list_id
-//  - subscribe_label
-//  - subscribe_button
 
 // Include code for the widget.
 include_once( __DIR__ . '/includes/widget-wsu-mailchimp.php' );
