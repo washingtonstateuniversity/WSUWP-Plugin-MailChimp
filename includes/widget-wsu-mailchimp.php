@@ -26,7 +26,7 @@ class Widget_WSU_MailChimp extends WP_Widget {
 		<!-- Begin MailChimp Signup Form -->
 		<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
 		<div id="mc_embed_signup">
-			<form action="//wsu.us3.list-manage.com/subscribe/post?u=<?php esc_attr_e( $instance['user_id'] ); ?>&amp;id=<?php esc_attr_e( $instance['list_id'] ); ?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+			<form action="//<?php echo esc_attr( $instance['server'] ); ?>/subscribe/post?u=<?php esc_attr_e( $instance['user_id'] ); ?>&amp;id=<?php esc_attr_e( $instance['list_id'] ); ?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 				<div id="mc_embed_signup_scroll">
 					<label for="mce-EMAIL"><?php echo esc_html( $instance['subscribe_label'] ); ?></label>
 					<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
